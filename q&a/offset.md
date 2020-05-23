@@ -54,24 +54,41 @@ Query OK, 0 rows affected
 可以明显地看出：**查询的时延随着 OFFSET 的增大而增大**。EXPLAIN 一下：
 
 ```sql
-EXPLAIN SELECT * FROM `roles` LIMIT 1 OFFSET 1000000\G;
+EXPLAIN FORMAT=json SELECT * FROM `roles` LIMIT 1 OFFSET 1000000;
 
-***************************[ 1. row ]***************************
-id            | 1
-select_type   | SIMPLE
-table         | roles
-partitions    | <null>
-type          | ALL
-possible_keys | <null>
-key           | <null>
-key_len       | <null>
-ref           | <null>
-rows          | 3313114
-filtered      | 100.0
-Extra         | <null>
++------------------------------------------+
+| EXPLAIN                                  |
++------------------------------------------+
+| {                                        |
+|   "query_block": {                       |
+|     "select_id": 1,                      |
+|     "cost_info": {                       |
+|       "query_cost": "340763.40"          |
+|     },                                   |
+|     "table": {                           |
+|       "table_name": "roles",             |
+|       "access_type": "ALL",              |
+|       "rows_examined_per_scan": 3313114, |
+|       "rows_produced_per_join": 3313114, |
+|       "filtered": "100.00",              |
+|       "cost_info": {                     |
+|         "read_cost": "9452.00",          |
+|         "eval_cost": "331311.40",        |
+|         "prefix_cost": "340763.40",      |
+|         "data_read_per_join": "985M"     |
+|       },                                 |
+|       "used_columns": [                  |
+|         "actor_id",                      |
+|         "movie_id",                      |
+|         "role"                           |
+|       ]                                  |
+|     }                                    |
+|   }                                      |
+| }                                        |
++------------------------------------------+
 ```
 
-可以发现 `type = ALL`，其实就是一次全表扫描，扫过的数据总条数为 `offset + limit`。你也许想问，为什么数据库不能像 "访问数组中第 n 个元素" 一样直接跳跃到其所在位置直接取到结果呢？这里的原因有很多，包括但不局限于：
+可以看到 `access_type = ALL`，其实就是一次全表扫描。扫过的数据总条数为 `offset + limit`。你也许想问，为什么数据库不能像 "访问数组中第 n 个元素" 一样直接跳跃到其所在位置直接取到结果呢？这里的原因有很多，包括但不局限于：
 
 1. 数据表中每条数据的长度不定，比如 `roles` 表中的 `role` 字段的类型为 `varchar(100)`
 2. 如果部分数据被删除，就会在数据块之前形成间隔
