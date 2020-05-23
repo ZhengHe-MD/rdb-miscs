@@ -2,12 +2,12 @@
 
 1888 年到 2008 年间的电影数据库。
 
-## Source
+## 数据来源
 
 1. [ilp_datasets](http://kt.ijs.si/janez_kranjc/ilp_datasets/)
 2. [relational dataset repository](https://relational.fit.cvut.cz/dataset/IMDb)
 
-## Models
+## 数据模型
 
 ![imdb_ijs_models](./imdb_ijs.svg)
 
@@ -23,7 +23,7 @@
 | actors           | 演员信息                           |
 | roles            | 电影角色及对应的演员信息           |
 
-## Import
+## 数据导入
 
 ### MySQL
 
@@ -36,7 +36,7 @@ Server version: 8.0.19 Homebrew
 ...
 ```
 
-现在数据库中建库：
+先在数据库中建库：
 
 ```sql
 CREATE DATABASE imdb;
