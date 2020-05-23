@@ -10,4 +10,4 @@
 ## Questions and Answers
 
 * [为什么不应该使用 OFFSET](./qa/offset.md)
-* [特定场景下应对写偏斜 (write skew) 的一种方案] (./qa/write-skew.md)
+* [特定场景下应对写偏斜 (write skew) 的一种方案](./qa/write-skew.md)
