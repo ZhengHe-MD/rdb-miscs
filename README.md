@@ -12,8 +12,10 @@
 * [为什么不应该使用 OFFSET](./qa/offset.md)
 * [特定场景下应对写偏斜 (write skew) 的一种方案](./qa/write-skew.md)
 * [什么时候宁可全表扫描也不走索引](./qa/prefer-full-table-scan.md)
-* [为什么 SELECT COUNT(*) 很慢](./qa/count_star.md)
+* [为什么 SELECT COUNT(\*) 很慢](./qa/count_star.md)
+* [通过 Demo 理解一致性模型](./sq/consistency-models-via-demos.md)
 
 ## Readings
 
 * [The Unofficial MySQL 8.0 Optimizer Guide](http://www.unofficialmysqlguide.com/)
+* [A Critique of ANSI SQL Isolation Levels](https://arxiv.org/pdf/cs/0701157.pdf)
