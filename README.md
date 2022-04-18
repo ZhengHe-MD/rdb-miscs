@@ -14,6 +14,7 @@
 * [什么时候宁可全表扫描也不走索引](./qa/prefer-full-table-scan.md)
 * [为什么 SELECT COUNT(\*) 很慢](./qa/count_star.md)
 * [通过 Demo 理解一致性模型](./qa/consistency-models-via-demos.md)
+* [随机选择一条数据](./qa/a-random-row.md)
 
 ## Readings
 
