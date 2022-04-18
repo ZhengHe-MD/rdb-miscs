@@ -198,10 +198,11 @@ Time: 0.013s
 
 ```sql
 > SELECT * FROM movies
-	 INNER JOIN (
-     SELECT FLOOR(MAX(id) * RAND()) as rand_id
+   INNER JOIN (
+     SELECT FLOOR(MAX(id) * RAND()) AS rand_id
      FROM movies
-   ) as movies_id ON movies.id > movies_id.rand_id
+   ) as movies_id
+   ON movies.id > movies_id.rand_id
    ORDER BY movies.id LIMIT 1;
 +-------+--------------------+------+--------+---------+
 | id    | name               | year | rank   | rand_id |
